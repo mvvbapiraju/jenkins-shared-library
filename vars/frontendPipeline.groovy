@@ -21,8 +21,8 @@ def call() {
             ansiColor('xterm')
         }
         environment {
-            DEFAULT_SLACK_CHANNEL = '#jenkins-ci'
-            RELEASES_SLACK_CHANNEL = '#techy-releases'
+            DEFAULT_SLACK_CHANNEL = '@Veera Mallipudi'
+            RELEASES_SLACK_CHANNEL = '@Veera Mallipudi'
             SSH_CREDENTIALS_ID = 'ec2-user-ssh-pubkey'
             TS_DEPLOY_KEY_ID = 'TS_DEPLOY_KEY'
             DATADOG_API_KEY_ID = 'DatadogAPIKey'
