@@ -25,7 +25,7 @@ def validateTrigger() {
 
     if ( ! env.BRANCH_NAME.contains('release') ) {
         // Disables Branch Indexing trigger on develop branch, and allows only Manual Trigger on other branches
-        if ( ( env.BRANCH_NAME == 'develop' && triggerCause =~ /(BranchIndexing)/ ) || ( env.BRANCH_NAME != 'develop' && ! triggerCause =~ /(UserId)/ ) ) {
+        if ( ( env.BRANCH_NAME == 'develop' && triggerCause =~ /(BranchIndexing)/ ) || ( env.BRANCH_NAME != 'develop' && !triggerCause =~ /(UserId)/ ) ) {
             println("Rejecting unwanted trigger, and maintaining previous build status...")
             usePreviousBuildResult()
             setBuildDescription("IGNORED: Unwanted Trigger Rejected")
