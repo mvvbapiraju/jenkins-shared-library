@@ -70,7 +70,11 @@ def call() {
                             def codeVersion = sh(returnStdout: true, script: "cat package.json  | grep '\"version\":' | sed 's/^.*\\\"version\\\": \\\"\\([a-zA-Z0-9_\\.\\-]*\\)\\\".*\$/\\1/'").trim()
 
                             if ( !params.JOB_TYPE || !params.ENVIRONMENT ) {
-                                throw new Exception("ABORTED: JOB_TYPE and ENVIRONMENT parameters must be provided.")
+                                throw new Exception("ABORTED: 'JOB_TYPE' and 'ENVIRONMENT' parameters must be provided.")
+                            }
+
+                            if ( params.JOB_TYPE == 'DEPLOY_ONLY' && !params.EBS_LABEL ) {
+                                throw new Exception("ABORTED: Valid 'EBS_LABEL' parameter must be provided, when 'DEPLOY_ONLY' JOB_TYPE is selected.")
                             }
 
                             env.BUILD_MESSAGE += ', Prepare'
