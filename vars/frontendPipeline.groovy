@@ -33,12 +33,6 @@ def call() {
             BUILD_ENV_DEV = 'dev'
             BUILD_ENV_STAGE = 'stage'
             BUILD_ENV_PROD = 'prod'
-
-            BUILD_SCRIPT = 'build_scripts/build_zip.sh'
-            PACKAGE_SCRIPT = 'build_scripts/build_docker_jenkins.sh'
-            DEPLOY_SCRIPT = 'build_scripts/deploy_ebs.sh'
-
-            ARTIFACT_ARCHIVE_PATH = 'deploy/*.zip'
         }
         stages{
             stage('Checkout'){
