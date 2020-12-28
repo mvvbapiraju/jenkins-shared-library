@@ -5,7 +5,7 @@ def setFrontendProperties(Map envMap) {
     def envChoice = (env.BRANCH_NAME == 'release') ? ['stage','prod'] : ['dev']
     properties([
         parameters([
-            choice(name: 'JOB_TYPE', choices: "\nBUILD_ONLY\nDEPLOY_ONLY\nBUILD_AND_DEPLOY", description: "Select an option to proceed with this job. 'develop' and 'release-*' branches can take any of these options, but branches ends with '-feature' are allowed only to build."),
+            choice(name: 'JOB_TYPE', choices: "BUILD_ONLY\nDEPLOY_ONLY\nBUILD_AND_DEPLOY", description: "Select an option to proceed with this job. 'develop' and 'release-*' branches can take any of these options, but branches ends with '-feature' are allowed only to build."),
             choice(name: 'ENVIRONMENT', choices: envChoice.join("\n"), description: 'Environment Build Flag'),
             string(name: 'EBS_LABEL', defaultValue: '', description: "REQUIRED: AWS Elastic BeanStalk Resource Label, MUST be provided only when 'DEPLOY_ONLY' JOB_TYPE is selected.<br><br>Eg: vidmob-creator-suite-0.48.0-dev-4 (without '.zip' extension)"),
             string(name: 'EBS_ENV', defaultValue: '', description: "OPTIONAL: AWS Elastic BeanStalk Environment, required only when 'DEPLOY_ONLY' JOB_TYPE is selected. If left blank, default value from application repo will be considered.<br><br>Eg: VidmobCreatorSuite-dev-20201216")
