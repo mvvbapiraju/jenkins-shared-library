@@ -181,7 +181,7 @@ def prepareDeployStage(String buildEnv, String ebsEnv, String ebsLabel, String c
                     sh "${env.DEPLOY_SCRIPT} '${buildEnv}' '${ebsEnv}' '${ebsLabel}'"
                 }
 
-                addDeployToDashboard(env: "DEPLOY: ${buildEnv}", buildNumber: "${deployVersion} <==> [${new Date().format('dd-MMM-yy  HH:mm:ss')}]")
+                addDeployToDashboard(env: "DEPLOY: ${buildEnv}", buildNumber: "${ params.EBS_LABEL ?: deployVersion } <==> [${new Date().format('dd-MMM-yy  HH:mm:ss')}]")
                 def slackMessage = "DEPLOYED: `${deployVersion}` is now updated on `${buildEnv}` and will be availble in a few minutes"
                 if ( buildEnv != env.BUILD_ENV_DEV ) {
                     notifySlack(env.RELEASES_SLACK_CHANNEL, 'SUCCESS', slackMessage)
