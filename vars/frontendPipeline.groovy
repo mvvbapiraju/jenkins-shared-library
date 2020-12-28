@@ -42,7 +42,7 @@ def call() {
                             env.BUILD_MESSAGE = 'COMPLETED: '
                             env.SUCCESS_BUILD_MESSAGE = ''
                             env.SUCCESS_DEPLOY_MESSAGE = ''
-                            notifySlack(env.DEFAULT_SLACK_CHANNEL, 'STARTED')
+                            notifyUtils.notifySlack(env.DEFAULT_SLACK_CHANNEL, 'STARTED')
                             deleteDir()
                             figlet "Checking  out  Source  Code"
                             final scmVars = checkout(scm)
