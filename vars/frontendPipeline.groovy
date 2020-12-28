@@ -69,6 +69,10 @@ def call() {
                             def buildEnv
                             def codeVersion = sh(returnStdout: true, script: "cat package.json  | grep '\"version\":' | sed 's/^.*\\\"version\\\": \\\"\\([a-zA-Z0-9_\\.\\-]*\\)\\\".*\$/\\1/'").trim()
 
+                            if ( !params.JOB_TYPE || !params.ENVIRONMENT ) {
+                                throw new Exception("ABORTED: JOB_TYPE and ENVIRONMENT parameters must be provided.")
+                            }
+
                             env.BUILD_MESSAGE += ', Prepare'
 
                             if ( env.BRANCH_NAME.contains(env.BRANCH_REL_STRING) ) {                    // Release Branches for Stage and Prod

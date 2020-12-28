@@ -2,7 +2,7 @@
 
 def setFrontendProperties(Map envMap) {
 
-    def envChoice = (env.BRANCH_NAME == 'release') ? ['','stage','prod'] : ['','dev']
+    def envChoice = (env.BRANCH_NAME == 'release') ? ['stage','prod'] : ['dev']
     properties([
         parameters([
             choice(name: 'JOB_TYPE', choices: "\nBUILD_ONLY\nDEPLOY_ONLY\nBUILD_AND_DEPLOY", description: "Select an option to proceed with this job. 'develop' and 'release-*' branches can take any of these options, but branches ends with '-feature' are allowed only to build."),
