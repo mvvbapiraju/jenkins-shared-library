@@ -153,7 +153,7 @@ def prepareBuildStage(String buildEnv, String codeVersion) {
 
                 addDeployToDashboard(env: "BUILD: ${buildEnv}", buildNumber: "${deployVersion} <==> [${new Date().format('dd-MMM-yy  HH:mm:ss')}]")
                 def slackMessage = "BUILT: Successfully built `${deployVersion}` for `${buildEnv}`"
-                notifySlack(env.DEFAULT_SLACK_CHANNEL, 'SUCCESS', slackMessage)
+                notifyUtils.notifySlack(env.DEFAULT_SLACK_CHANNEL, 'SUCCESS', slackMessage)
 
                 env.BUILD_MESSAGE += ", Built ${buildEnv}"
                 env.SUCCESS_BUILD_MESSAGE += " '${buildEnv}' as '${deployVersion}'"
@@ -186,7 +186,7 @@ def prepareDeployStage(String buildEnv, String ebsEnv, String ebsLabel, String c
                 if ( buildEnv != env.BUILD_ENV_DEV ) {
                     notifySlack(env.RELEASES_SLACK_CHANNEL, 'SUCCESS', slackMessage)
                 }
-                notifySlack(env.DEFAULT_SLACK_CHANNEL, 'SUCCESS', slackMessage)
+                notifyUtils.notifySlack(env.DEFAULT_SLACK_CHANNEL, 'SUCCESS', slackMessage)
 
                 env.BUILD_MESSAGE += ", Deployed to ${buildEnv}"
                 env.SUCCESS_DEPLOY_MESSAGE += " '${buildEnv}' as '${deployVersion}'"
