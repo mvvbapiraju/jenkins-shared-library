@@ -1,4 +1,5 @@
 #!/usr/bin/groovy
+package pipeline
 
 def setFrontendProperties(Map envMap) {
 

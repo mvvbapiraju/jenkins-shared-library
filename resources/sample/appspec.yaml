@@ -1,0 +1,24 @@
+# This is the standard CodeDeploy ECS Blue/Green AppSpec format:
+# ContainerName must match the container name in taskdef.json (containerDefinitions[].name)
+# ContainerPort must match the exposed container port and target group config.
+
+version: 1
+Resources:
+  - TargetService:
+      Type: AWS::ECS::Service
+      Properties:
+        # CodeDeploy uses the new task definition you provide with your revision
+        TaskDefinition: "taskdef.json"
+        LoadBalancerInfo:
+          ContainerName: "app"
+          ContainerPort: 8080
+
+# Optional lifecycle hooks (commonly Lambda hooks).
+# These hooks are a HUGE plus in interviews because they show how you do smoke tests,
+# warmups, validation, and canary gates without relying only on ECS health checks.
+Hooks:
+  - BeforeInstall: "validateRevisionHook"
+  - AfterInstall: "warmupHook"
+  - AfterAllowTestTraffic: "smokeTestHook"
+  - BeforeAllowTraffic: "finalGateHook"
+  - AfterAllowTraffic: "postDeployHook"

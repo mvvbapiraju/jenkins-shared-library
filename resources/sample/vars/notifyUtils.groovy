@@ -1,4 +1,5 @@
 #!/usr/bin/groovy
+package pipeline
 
 def notifySlack(String channelName=env.DEFAULT_SLACK_CHANNEL, String notifyStatus='', String addMessage='' ) {
     // Build status of null means success

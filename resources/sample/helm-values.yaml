@@ -1,0 +1,39 @@
+# This is just a clean “enterprise default” values file that matches common Helm conventions.
+
+replicaCount: 2
+
+image:
+  repository: 123456789012.dkr.ecr.us-east-1.amazonaws.com/my-service
+  tag: "PLACEHOLDER_TAG"
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 8080
+
+resources:
+  requests:
+    cpu: 200m
+    memory: 512Mi
+  limits:
+    cpu: 1000m
+    memory: 1024Mi
+
+env:
+  - name: SPRING_PROFILES_ACTIVE
+    value: prod
+
+# For real environments, use external secrets + IRSA, rather than putting secrets directly in values.yaml.
+probes:
+  readiness:
+    path: /actuator/health/readiness
+    initialDelaySeconds: 20
+    periodSeconds: 10
+  liveness:
+    path: /actuator/health/liveness
+    initialDelaySeconds: 60
+    periodSeconds: 20
+
+ingress:
+  enabled: false
